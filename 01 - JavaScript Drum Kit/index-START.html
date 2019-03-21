@@ -59,6 +59,28 @@
 
 <script>
 
+const nodeList = document.querySelectorAll('div.key')
+
+const nodeArr = Array.from(nodeList)
+nodeArr.forEach(node => {
+  node.addEventListener('transitionend', () => {
+    node.classList.remove('playing')
+  })
+})
+
+
+window.addEventListener('keydown', e => {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+  if (!audio) {
+    return
+  }
+  const div = document.querySelector(`div[data-key="${e.keyCode}"]`)
+  div.classList.add('playing')
+  audio.currentTime = 0
+  audio.play()
+})
+
+
 </script>
 
 
