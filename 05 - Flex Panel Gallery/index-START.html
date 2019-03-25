@@ -26,6 +26,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -43,19 +44,27 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
-    .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
-    .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
-    .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
-    .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+    .panel1 { background-image:url(photo1.jpg); }
+    .panel2 { background-image:url(photo2.jpg); }
+    .panel3 { background-image:url(photo3.jpg); }
+    .panel4 { background-image:url(photo4.jpg); }
+    .panel5 { background-image:url(photo5.jpg); }
 
     /* Flex Children */
     .panel > * {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
     }
 
     .panel p {
@@ -68,8 +77,19 @@
     .panel p:nth-child(2) {
       font-size: 4em;
     }
+    .panel p:first-child {
+      transform: translateY(-100%)
+    }
+    .panel p:last-child {
+      transform: translateY(100%)
+    }
+    .panel.open-active p:first-child,  .panel.open-active p:last-child{
+      transform: translateY(0)
+    }
+
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,7 +125,34 @@
   </div>
 
   <script>
+    const nodeList = document.querySelectorAll('.panel')
 
+    class PanelGallery {
+      constructor(nodeList) {
+        this.nodeList = nodeList
+        this.clickIndex = -1
+        nodeList.forEach((item, index) => {
+          item.addEventListener('click', this.toggleOpen.bind(this, index))
+          item.addEventListener('transitionend', this.toggleActive.bind(this, index))
+        })
+      }
+
+      toggleOpen(index) {
+        if (this.clickIndex > -1) {
+          this.nodeList[this.clickIndex].classList.toggle('open')
+        }
+        this.clickIndex = index
+        this.nodeList[index].classList.toggle('open')
+      }
+
+      toggleActive(index, e) {
+        if (e.propertyName.includes('flex')) {
+          this.nodeList[index].classList.toggle('open-active')
+        }
+      }
+    }
+    
+    new PanelGallery( nodeList )
   </script>
 
 
