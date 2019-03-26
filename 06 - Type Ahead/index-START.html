@@ -17,6 +17,44 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const cities = []
+
+fetch(endpoint)
+.then(blob => blob.json())
+.then(data => {
+  cities.push(...data)
+}).catch(err => {
+  console.log(err)
+})
+
+const input = document.querySelector('.search')
+const suggestions = document.querySelector('.suggestions')
+function formatPopluation(x) {
+  return parseInt(x).toLocaleString()
+}
+
+function filterCities(e) {
+  const regName = new RegExp(e.target.value, 'ig')
+  const result = cities.filter(place => {
+    return place.city.match(regName) || place.state.match(regName)
+  })
+  const html = result.map(place => {
+    const city = place.city.replace(regName, `<span class="hl">${e.target.value}</span>`)
+    const state = place.state.replace(regName, `<span class="hl">${e.target.value}</span>`)
+    return `
+      <li>
+        <span class="name">${city}, ${state}</span>
+        <span class="popluation">${formatPopluation(place.population)}</span>
+      </li>
+    `
+  }).join('')
+  suggestions.innerHTML = html
+}
+
+input.addEventListener('change', filterCities)
+input.addEventListener('keyup', filterCities)
+
+
 </script>
 </body>
 </html>
