@@ -19,27 +19,64 @@
 
     // Regular
 
+    console.log('hello')
+
     // Interpolated
+
+    // console.log('%s shi ni ma', 'alibaba')
 
     // Styled
 
+    // console.log('%c 超级变变变', 'color: #bada55')
+
     // warning!
+
+    console.warn('meiyoubanfa')
 
     // Error :|
 
+    console.error('something wrong')
+
     // Info
+
+    console.info('there is a i')
 
     // Testing
 
+    console.assert(1 === 2, 'wo jiu cuo le za di')
+
     // clearing
 
+    console.clear()
+
     // Viewing DOM Elements
+    const p = document.querySelector('p')
+    console.log(p)
+    console.dir(p)
 
     // Grouping together
 
+    dogs.forEach(item => {
+      console.group(`${item.name}`)
+      console.log(`${item.age}`)
+      console.log(`${item.name}`)
+      console.groupEnd()
+    })
+
     // counting
 
+    console.count('ali')
+    console.count('ali')
+    console.count('ali')
+    console.count('ali')
+
     // timing
+
+    console.time('有多久的延时')
+
+    setTimeout(() => {
+      console.timeEnd('有多久的延时')
+    }, 1000)
 
   </script>
 </body>
