@@ -7,6 +7,16 @@
 </head>
 <body>
 <script>
+  const secret = 'sailfish'
+  const checkList = []
+
+  window.addEventListener('keyup', e => {
+    checkList.push(e.key)
+    checkList.splice(-secret.length - 1, checkList.length - secret.length)
+    if (checkList.join('').includes(secret)) {
+      cornify_add()
+    }
+  })
 </script>
 </body>
 </html>
