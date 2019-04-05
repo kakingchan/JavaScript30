@@ -15,10 +15,14 @@
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
+    // const copyList = players
 
     // however what happens when we update that array?
+    // copyList[2] = 'kang'
 
     // now here is the problem!
+    // console.log(copyList)
+    // console.log(players)
 
     // oh no - we have edited the original array too!
 
@@ -27,10 +31,28 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    // const copy2 = players.slice()
+    // copy2[2] = 'kang'
+    // console.log(copy2)
+    // console.log(players)
 
     // or create a new array and concat the old one in
+    // const copy3 = players.concat([])
+    // copy3[2] = 'kang'
+    // console.log(copy3)
+    // console.log(players)
 
     // or use the new ES6 Spread
+    // console.clear()
+    // const copy4 = [...players]
+    // copy4[2] = 'kang'
+    // console.log(copy4)
+    // console.log(players)
+
+    // const copy5 = Array.from(players)
+    // copy5[2] = 'kang'
+    // console.log(copy5)
+    // console.log(players)
 
     // now when we update it, the original one isn't changed
 
@@ -45,6 +67,10 @@
     // and think we make a copy:
 
     // how do we take a copy instead?
+    const obj1 = Object.assign({}, person)
+    obj1.email = 'kang@163.com'
+    console.log(person)
+    console.log(obj1)
 
     // We will hopefully soon see the object ...spread
 
