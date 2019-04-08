@@ -48,6 +48,19 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+function removeArticle(string) {
+  return string.replace(/a |an |the/ig, '').trim()
+}
+
+function changeToStr(string) {
+  return removeArticle(string).split(' ').join('').trim()
+}
+
+const sortedBand =  bands.sort((a, b) => {
+  return changeToStr(a) < changeToStr(b) ? -1 : 1
+})
+
+document.getElementById('bands').innerHTML = sortedBand.map(item => `<li>${item}</li>`).join('')
 
 </script>
 
