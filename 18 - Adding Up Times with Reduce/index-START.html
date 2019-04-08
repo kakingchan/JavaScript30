@@ -182,6 +182,19 @@
     </li>
   </ul>
 <script>
+  const timesNodes =  document.querySelectorAll('[data-time]')
+  const timesList = Array.from(timesNodes)
+  const allSeconds = timesList.reduce((total, node) => {
+    const timeArray = node.dataset.time.split(':').map(parseFloat)
+    let second = timeArray[0] * 60 + timeArray[1]
+    return total + second
+  }, 0)
+  let secondLeft = allSeconds
+  const hour = Math.floor(secondLeft / 3600)
+  secondLeft = secondLeft % 3600
+  const min = Math.floor(secondLeft / 60)
+  secondLeft = secondLeft % 60
+  console.log(hour, min, secondLeft)
 </script>
 </body>
 </html>
