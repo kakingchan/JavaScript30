@@ -27,6 +27,26 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+    const a = document.querySelectorAll('a')
+    const span = document.createElement('span')
+    span.classList.add('highlight')
+    document.body.appendChild(span)
+    
+    function highLightLinks(e) {
+      console.log(this)
+      const coord = this.getBoundingClientRect()
+      console.log(coord)
+      span.style.width = `${coord.width}px`
+      span.style.height = `${coord.height}px`
+      span.style.left = `${coord.left + scrollX}px`
+      span.style.top = `${coord.top + scrollY}px`
+    }
+
+    a.forEach(a => {
+      a.addEventListener('mouseover', highLightLinks)
+    })
+    
   </script>
 </body>
 </html>
